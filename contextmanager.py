@@ -1,7 +1,7 @@
 import csv
 from collections import namedtuple
 
-# contextmanager in class
+# contextmanager in class setup
 
 class DataIterator:
     def __init__(self, fname): 
