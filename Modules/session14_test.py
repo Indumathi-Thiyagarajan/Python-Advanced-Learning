@@ -1,5 +1,5 @@
 import unittest
-import text_toolkit as tt  # The student's module
+import text_toolkit as tt 
 import os
 
 
