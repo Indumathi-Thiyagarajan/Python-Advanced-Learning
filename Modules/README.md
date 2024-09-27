@@ -15,10 +15,10 @@ print(cooccurrence_matrix)
 for line in tt.text_generator('example.txt'):
     print(line)
 
-
+# UNDERSTANDING OF MODULE AND PACKAGES
 In Python, a module is essentially a file containing Python code. Modules can define functions, classes, and variables, and can also include runnable code. They help in organizing code logically and can be reused across different programs.
 
-# first lets create a module named math_operations.py
+### first lets create a module named math_operations.py
 
     #math_operations.py
 
@@ -30,7 +30,7 @@ In Python, a module is essentially a file containing Python code. Modules can de
 
     pi = 3.14
 
-# using module in other scripts
+### using module in other scripts
 
     import math_operations
     print(math_operations.add(5,3))
@@ -44,24 +44,24 @@ Package is a collection of modules organized in directories that provide a hiera
     circle.py
     rectangle.py
 
-# lets create a init module gemotery/__init__.py
+### lets create a init module gemotery/__init__.py
 
     from .circle import area_of_circle
     from .rectangle import area_of_rectangle 
 
 
-# module geometry/circle.py
+### module geometry/circle.py
     def area_of_circle(radius):
         pi = 3.14
         return pi*(radius**2)
 
 
-# lets create rectangle.py
+### lets create rectangle.py
 def area_of_rectangle(length, width):
     return length * width
 
 
-# using package in other script 
+### using package in other script 
 
     import geometry
     print(geometry.area_of_circle(5))
