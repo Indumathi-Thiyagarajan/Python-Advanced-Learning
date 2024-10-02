@@ -252,7 +252,7 @@ Should return a string that ideally looks like a valid Python expression to recr
     # Using repr() to get the string representation
     print(repr(person))  # Output: Person(name='Alice', age=30)
 
-# 🌞🌞🌻 ALL ABOUT ITER AND NEXT: 
+# 🌞🌞🌞 ALL ABOUT ITER AND NEXT 🌞🌞🌞: 
 
 Python’s built-in iterators for lists, tuples, strings, etc., already have the __iter__() and __next__() methods implemented. 
 
@@ -385,7 +385,7 @@ The __next__ method is responsible for returning the next item in the sequence a
     result = add(a=2, b=3)
     print(result)  # Output: 5
 
-# 🍄🍄🍄 GENERATORS:
+# 🌞🌞🌞 GENERATORS 🌞🌞🌞🌞:
 
 A generator object in Python is a special type of iterator that allows you to iterate over a sequence of values lazily, meaning it generates values on the fly and only when needed. This can be very memory efficient, especially when dealing with large datasets.A generator function is defined like a normal function but uses the **yield** statement to return values one at a time.
 
@@ -454,7 +454,7 @@ Using a generator simplifies the implementation of the Deck class by eliminating
         for square in sq:
             print(square)
 
-# ✨✨🌟 UNDERSTANDING CLASS CALLING:
+# 🌞🌞🌞 UNDERSTANDING CLASS CALLING 🌞🌞🌞:
 
 **attributes** : Attributes are variables that belong to an object or class. They are used to store data that is associated with an instance of a class.
 **parameters** : Parameters are variables that are used in function or method definitions to accept input values. They are placeholders for the arguments that will be passed to the function or method.
@@ -511,7 +511,7 @@ class MyClass:
         self.data = data
         self.threshold = threshold
 
-# 🌈🌈🌈 DECORATOR UNDERSTANDING:
+# 🌞🌞🌞 DECORATOR UNDERSTANDING 🌞🌞🌞:
 ### using get and setter method inside class also help of property decorator:
 
 In the below class, we can see that width is initialized inside the init and also inside the setter method. this is because, initialization within the setter method helps to update the area automatically once the width is changed when isntance of class is called. 
@@ -609,7 +609,7 @@ to call a method like area without creating an instance of the class, you would 
     print(Circlec.calculate_area(5))  # Output: 78.53981633974483
 
 
-# 🍓🍇🍇 MAGIC METHODS INSIDE CLASSES:
+# 🌞🌞🌞 MAGIC METHODS INSIDE CLASSES 🌞🌞🌞:
 
 ### Usage of __eq__() and __gt__():
 
@@ -788,7 +788,7 @@ The __next__ method is responsible for returning the next item in the sequence a
         print(square)
 
     
-#🍀🍀🌲 ITERATING CLASS INSIDE A CLASS:
+# 🌞🌞🌞 ITERATING CLASS INSIDE A CLASS 🌞🌞🌞:
 
 Steps:
 **Define the Iterable Class:**
@@ -804,7 +804,7 @@ Steps:
 
 
 
-#⚡️❄️❄️ CONTEXT MANAGER:
+# 🌞🌞🌞 CONTEXT MANAGER 🌞🌞🌞:
 ###### Contextmanager module from contextlib
 The @contextmanager decorator from the contextlib module allows you to convert a regular function into a context manager. This can be very convenient because it simplifies the creation of context managers, making your code more readable and maintainable.  Apply the @contextmanager decorator to the function to convert it into a context manager.
 
@@ -849,7 +849,7 @@ Using the @contextmanager decorator, you can convert this function into a contex
 In the context of @contextmanager, yield is used to provide a value (or values) to the with block.
 The code before yield is executed when entering the context, and the code after yield (typically in a finally block) is executed when exiting the context.This allows the code inside the with block to access both the reader for iterating over the rows and the named tuple class for converting rows into named tuples.
 
-# Context Managers in Python
+### Context Managers in Python
 
 > context manager create module or area where we do our stuffs and get rid of it. 
 > whatevre is done inside context manager , will be there as long as context is there and the moment we are out of context all the new objects created inside context manager will be gone and will be back to default
