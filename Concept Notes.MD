@@ -99,23 +99,23 @@ Behavior: Only the top-level structure of the object is copied. Nested objects a
 
 # List comprehension
 
-s = "hello"
-char_list = [char for char in s]
-print(char_list)
+    s = "hello"
+    char_list = [char for char in s]
+    print(char_list)
+    
+    #without list comprehension
+    table = []
+    for i in range(1, 11):
+        row = []
+        for j in range(1, 11):
+            row.append(i*j)
+        table.append(row)
 
-#without list comprehension
-table = []
-for i in range(1, 11):
-    row = []
-    for j in range(1, 11):
-        row.append(i*j)
-    table.append(row)
+    #with list comprehension
+    table2 = [[i*j for j in range(1, 11)] for i in range(1, 11)]
 
-#with list comprehension
-table2 = [[i*j for j in range(1, 11)] for i in range(1, 11)]
-
-flattened_grades = [grade for sublist in grades for grade in sublist if grade >= 75]
-print(flattened_grades)
+    flattened_grades = [grade for sublist in grades for grade in sublist if grade >= 75]
+    print(flattened_grades)
 
 
 # range
