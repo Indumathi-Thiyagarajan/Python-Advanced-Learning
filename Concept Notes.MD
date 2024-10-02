@@ -28,14 +28,14 @@ appending used for adding one element, extends add multiple element.
 
     l = [1, 2, 3]
     l.extend([4, 5])
-    print(l)  ### Output: [1, 2, 3, 4, 5]
+    print(l)  # Output: [1, 2, 3, 4, 5]
 
     l = [1, 2, 3]
     l.extend((4, 5))
     print(l)  # Output: [1, 2, 3, 5, 4] #since it is set, the ordre is not guaranteed 
 
 
-# pop 
+### pop 
 Removes and returns an element from the list.
 Default Behavior: If no index is specified, it removes and returns the last element.
 Usage: list.pop([index])
@@ -49,7 +49,7 @@ Usage: list.pop([index])
     print(second_element)  # Output: 2
     print(l)  # Output: [1, 3, 4]
 
-# insert()
+### insert()
 Function: Inserts an element at a specified position in the list.
 Usage: list.insert(index, element)
 
@@ -57,7 +57,7 @@ Usage: list.insert(index, element)
     l.insert(2, 'a')
     print(l)  # Output: [1, 2, 'a', 3, 4, 5]
 
-# reverse()
+### reverse()
 
 This method modifies the list directly and does not return a new list.
 
@@ -65,7 +65,7 @@ This method modifies the list directly and does not return a new list.
     l.reverse()
     print(l)  # Output: [5, 4, 3, 2, 1]
 
-# Shallow Copy (copy)
+### Shallow Copy (copy)
 
  A shallow copy shares references to the same objects, while a deep copy creates entirely new objects.
 
@@ -83,7 +83,7 @@ Behavior: Only the top-level structure of the object is copied. Nested objects a
     print("Original:", original)  # Output: [[99, 2, 3], [4, 5, 6]]
     print("Shallow Copied:", shallow_copied)  # Output: [[99, 2, 3], [4, 5, 6]]
 
-# Deep Copy
+### Deep Copy
  Creates a new object and recursively copies all objects found in the original.
  Usage: copy.deepcopy(obj)
 
@@ -97,7 +97,7 @@ Behavior: Only the top-level structure of the object is copied. Nested objects a
     print("Deep Copied:", deep_copied)  # Output: [[99, 2, 3], [4, 5, 6]]
 
 
-# List comprehension
+### List comprehension
 
     s = "hello"
     char_list = [char for char in s]
@@ -118,7 +118,7 @@ Behavior: Only the top-level structure of the object is copied. Nested objects a
     print(flattened_grades)
 
 
-# range
+### range
 
 range() generates numbers on the fly and doesn’t store them in memory, making it very memory efficient1. This is particularly useful when dealing with large sequences.
 
@@ -136,7 +136,7 @@ The range() function in Python cannot be directly used with strings because it o
     for i in range(len(s)):
         print(s[i])
 
-# zip
+### zip
 
 The zip() function takes multiple iterables (like lists, tuples, etc.) and returns an iterator of tuples, where the i-th tuple contains the i-th element from each of the input iterables.
 
@@ -150,7 +150,7 @@ The zip() function takes multiple iterables (like lists, tuples, etc.) and retur
     # Converting to a list to see the result
     print(list(zipped))  # Output: [(1, 'a'), (2, 'b'), (3, 'c')]
 
-# map()
+### map()
 
 The map() function applies a given function to all items in an input iterable (like a list) and returns an iterator of the results.
 
@@ -184,7 +184,7 @@ The map() function applies a given function to all items in an input iterable (l
     added = list(map(lambda x: x + 10, numbers))
     print(added)
 
-# reduce():
+### reduce():
 
 is a **cummulative** function that Aggregates all elements in an iterable into a single value by applying a function cumulatively. Outputs single value and not list or sequence
 
@@ -215,7 +215,7 @@ is a **cummulative** function that Aggregates all elements in an iterable into a
 
     print(concatenated_string)  # Output: Hello World!
 
-# lambda ():
+### lambda ():
 
 **lambda arguments: expression**. 
 
@@ -234,7 +234,7 @@ is a **cummulative** function that Aggregates all elements in an iterable into a
     added = list(map(lambda x: x + 10, numbers))
     print(added)
 
-# repr():
+### repr():
 
 Should return a string that ideally looks like a valid Python expression to recreate the object.
 
@@ -252,11 +252,11 @@ Should return a string that ideally looks like a valid Python expression to recr
     # Using repr() to get the string representation
     print(repr(person))  # Output: Person(name='Alice', age=30)
 
-#🌞🌞🌻 ALL ABOUT ITER AND NEXT: 
+# 🌞🌞🌻 ALL ABOUT ITER AND NEXT: 
 
 Python’s built-in iterators for lists, tuples, strings, etc., already have the __iter__() and __next__() methods implemented. 
 
-##### non custom class usage :
+### non custom class usage :
     The iter() function can be used outside of classes to create an iterator from any iterable object, such as lists, tuples, strings, and more. These iterators have the __iter__() and __next__() methods built-in.
 
     #example 1:
@@ -296,16 +296,16 @@ Python’s built-in iterators for lists, tuples, strings, etc., already have the
             cars.append(car)
     cars[0]
 
-##### custom class usage:
+### custom class usage:
 
 When you create your own classes and want them to be iterable, you need to implement these methods yourself using __next__() and __iter__() inside your class. 
 
 
-# __iter__():
+### __iter__():
 
 usually __iter__() returns self making the entire instance of class iterable. The __iter__ method itself does not perform iteration; it simply returns an iterator. For the iteration to work, the returned iterator must implement the __next__ method. So __iter__() cannot work independentaly. When you create a custom class that represents a collection of items, implementing __iter__ allows you to use it in a for loop or any other context that expects an iterable.
 
-# __next__():
+### __next__():
 
 The __next__ method is responsible for returning the next item in the sequence and raising a StopIteration exception when there are no more items. next can work independently. 
 
@@ -366,7 +366,7 @@ The __next__ method is responsible for returning the next item in the sequence a
         print(square)
 
 
-# ARGUMENTS OF A FUNCTION:
+### ARGUMENTS OF A FUNCTION:
 
 **positional_argument**: These parameters must be provided in the exact order they are defined in the function.  Use when the function has a small number of parameters and the order is intuitive.
 
@@ -402,7 +402,7 @@ A generator object in Python is a special type of iterator that allows you to it
     for num in counter:
         print(num)
 
-# list comprehension vs generator
+### list comprehension vs generator
 
 If you only need to iterate over the sequence once and want to save memory, use a generator expression. If you need to access the elements multiple times or perform operations that require the entire sequence, use a list comprehension.
 
@@ -454,7 +454,7 @@ Using a generator simplifies the implementation of the Deck class by eliminating
         for square in sq:
             print(square)
 
-#✨✨🌟 UNDERSTANDING CLASS CALLING:
+# ✨✨🌟 UNDERSTANDING CLASS CALLING:
 
 **attributes** : Attributes are variables that belong to an object or class. They are used to store data that is associated with an instance of a class.
 **parameters** : Parameters are variables that are used in function or method definitions to accept input values. They are placeholders for the arguments that will be passed to the function or method.
@@ -497,7 +497,7 @@ Absolutely, I’d be happy to explain this concept in detail! When you call a cl
         # Access attributes and methods
         print(my_car.start_car())
 
-# use of isinstance() inside class:
+### use of isinstance() inside class:
 
 when u are unaware of what data comes inside the class and when u have any conditional range, where only if the data comes within particular range the class will function we check using isinstance... in other case , when u have control of what data comes inside u can directly initialize without checking
 
@@ -511,8 +511,8 @@ class MyClass:
         self.data = data
         self.threshold = threshold
 
-#🌈🌈 DECORATOR UNDERSTANDING:
-# using get and setter method inside class also help of property decorator:
+# 🌈🌈🌈 DECORATOR UNDERSTANDING:
+### using get and setter method inside class also help of property decorator:
 
 In the below class, we can see that width is initialized inside the init and also inside the setter method. this is because, initialization within the setter method helps to update the area automatically once the width is changed when isntance of class is called. 
 
@@ -558,7 +558,7 @@ Also one more advantages of get setter is, the validation happens properly... if
     print(c.radius)            # Output: 10
     print(c.area())              # Output: 314.1592653589793
 
-# using @property method:
+### @property:
 
 using @ property, u can simply call c.area in above code instead of c.area().
     @property
@@ -572,7 +572,7 @@ using @ property, u can simply call c.area in above code instead of c.area().
 
 
     
-# using @static method : 
+### @static method : 
 to call a method like area without creating an instance of the class, you would typically use a @staticmethod or @classmethod
 
     import math
@@ -609,9 +609,9 @@ to call a method like area without creating an instance of the class, you would 
     print(Circlec.calculate_area(5))  # Output: 78.53981633974483
 
 
-# MAGIC METHODS INSIDE CLASSES:
+# 🍓🍇🍇 MAGIC METHODS INSIDE CLASSES:
 
-# Usage of __eq__() and __gt__():
+### Usage of __eq__() and __gt__():
 
 The other parameter represents the instance you are comparing your current instance (self) to
 
@@ -633,14 +633,14 @@ The other parameter represents the instance you are comparing your current insta
     print(poly1 == poly3)
     print(poly1 > poly2)
 
-# __len__():
+### __len__():
 
 This method returns the number of polygons in the Polygon_sequence instance. since __len__(), __next__() are all inbuilt methods of a class when calling it we dont have to call it as class.len instead we can directly call the len. 
 
     polygon_seq = Polygon_sequence(5)
     print(len(polygon_seq))  # Output: 3
 
-# __getitem__():
+### __getitem__():
 
 The __getitem__ method allows an instance of your class to support indexing, like a list or tuple. This method should return the item at the specified index.
 The __getitem__ method allows an object to use the indexing syntax (obj[key]) to retrieve items. __getitem__ and __len__ together is an alternative of __iter__ and __next__
@@ -654,7 +654,7 @@ The __getitem__ method allows an object to use the indexing syntax (obj[key]) to
 
     polygon_seq[0] returns the first polygon in the sequence.
 
-# __init__(): 
+### __init__(): 
 
 1. **Attributes Used Across Methods:**
         Initialize: If an attribute is used in multiple methods, it should be initialized in the __init__ method. This ensures that the attribute is available and has a defined state whenever it is accessed.
