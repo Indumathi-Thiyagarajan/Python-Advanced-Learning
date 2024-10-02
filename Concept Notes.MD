@@ -385,7 +385,7 @@ The __next__ method is responsible for returning the next item in the sequence a
     result = add(a=2, b=3)
     print(result)  # Output: 5
 
-#🍄🍄🍄 GENERATORS:
+# 🍄🍄🍄 GENERATORS:
 
 A generator object in Python is a special type of iterator that allows you to iterate over a sequence of values lazily, meaning it generates values on the fly and only when needed. This can be very memory efficient, especially when dealing with large datasets.A generator function is defined like a normal function but uses the **yield** statement to return values one at a time.
 
