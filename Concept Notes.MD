@@ -1,12 +1,12 @@
 
-# Sequence:
+### Sequence:
 A sequence is a general term for an ordered collection of items. Python sequences include lists, tuples, strings, ranges, and more. A list is a specific type of sequence that is mutable, meaning its contents can be changed after creation."""
 
-# Hashing:
+### Hashing:
 Hashing makes search faster. hashing makes the operation doesnt go sequentially instead it goes directly to the element. example when u are looking for 4 in a tuple (1,2,3,4,5), goes directly to elememt 4. all google indexes are hashed making the search faster. 
 hashing works on immutable data type [ works on tupple and doesnt work on list].
 
-# clear()
+### clear()
 
     l = [1, 2, 3, 4, 5]
     m = l
@@ -18,7 +18,7 @@ hashing works on immutable data type [ works on tupple and doesnt work on list].
     l = []
     print(m)  # Output: [1, 2, 3, 4, 5]
 
-# Appending vs extending:
+### Appending vs extending:
 
 appending used for adding one element, extends add multiple element. 
 
@@ -28,7 +28,7 @@ appending used for adding one element, extends add multiple element.
 
     l = [1, 2, 3]
     l.extend([4, 5])
-    print(l)  # Output: [1, 2, 3, 4, 5]
+    print(l)  ### Output: [1, 2, 3, 4, 5]
 
     l = [1, 2, 3]
     l.extend((4, 5))
