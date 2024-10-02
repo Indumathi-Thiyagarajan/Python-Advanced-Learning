@@ -6,6 +6,8 @@ A sequence is a general term for an ordered collection of items. Python sequence
 Hashing makes search faster. hashing makes the operation doesnt go sequentially instead it goes directly to the element. example when u are looking for 4 in a tuple (1,2,3,4,5), goes directly to elememt 4. all google indexes are hashed making the search faster. 
 hashing works on immutable data type [ works on tupple and doesnt work on list].
 
+*** for loop in general looks for iter and next. for loop stops when stop iteration is called *** 
+
 ### clear()
 
     l = [1, 2, 3, 4, 5]
@@ -252,10 +254,16 @@ Should return a string that ideally looks like a valid Python expression to recr
     # Using repr() to get the string representation
     print(repr(person))  # Output: Person(name='Alice', age=30)
 
+### named tuple:
+
+A named tuple in Python is a subclass of tuples that allows you to access its elements using named fields instead of just index positions.
+
+
+
 # 🌞🌞🌞 ALL ABOUT ITER AND NEXT 🌞🌞🌞: 
 
 Python’s built-in iterators for lists, tuples, strings, etc., already have the __iter__() and __next__() methods implemented. 
-*** An iterable is an object that return iterator ***. All the materials in the iterables should be predefined. 
+
 
 ### non custom class usage :
     The iter() function can be used outside of classes to create an iterator from any iterable object, such as lists, tuples, strings, and more. These iterators have the __iter__() and __next__() methods built-in.
@@ -296,6 +304,48 @@ Python’s built-in iterators for lists, tuples, strings, etc., already have the
             car = Car(*data)
             cars.append(car)
     cars[0]
+
+### iterator and iterable:
+*** An iterable is an object that return iterator ***. All the materials in the iterables should be predefined. 
+An iterator must implement both __iter__() and __next__().
+An iterable must implement __iter__(), which returns an iterator. you can iterate over iterable as many times , but iterator only once. 
+
+    _SUITS = ('Spades', 'Hearts', 'Diamonds', 'Clubs')
+    _RANKS = tuple(range(2, 11) ) + tuple('JQKA')
+    from collections import namedtuple
+    
+    Card = namedtuple('Card', 'rank suit')
+    
+    class CardDeck:
+        def __init__(self):
+            self.length = len(_SUITS) * len(_RANKS)
+    
+        def __len__(self):
+            return self.length
+        
+        def __iter__(self):
+            return self.CardDeckIterator(self.length)
+            
+        class CardDeckIterator:
+            def __init__(self, length):
+                self.length = length
+                self.i = 0
+                
+            def __iter__(self):
+                return self
+            
+            def __next__(self):
+                if self.i >= self.length:
+                    raise StopIteration
+                else:
+                    suit = _SUITS[self.i // len(_RANKS)]
+                    rank = _RANKS[self.i % len(_RANKS)]
+                    self.i += 1
+                    return Card(rank, suit)
+
+    deck = CardDeck()
+    for card in deck:  
+    print(card)
 
 ### custom class usage:
 
@@ -455,6 +505,62 @@ Using a generator simplifies the implementation of the Deck class by eliminating
         for square in sq:
             print(square)
 
+# 🌞🌞🌞 LAZY ITERATOR 🌞🌞🌞:
+
+* Using yield: Instead of returning a list, you use the yield keyword to return values one at a time. This makes the function a generator.
+* No List Storage: Since values are generated on-the-fly, there’s no need to store them in a list, which saves memory.
+
+* List Comprehension (Without Lazy Iterator)
+    Memory Usage: The entire list is generated and stored in memory at once.
+    Immediate Computation: All values are computed immediately when the list is created.
+    Data Structure: The result is a list, which is a concrete data structure.
+
+        squares = [x**2 for x in range(5)]
+
+* Generator Expression (Using Lazy Iterator)
+    Memory Efficiency: Values are generated one at a time and not stored in memory all at once. This is more memory-efficient, especially for large datasets.
+    Lazy Evaluation: Values are computed on-the-fly as you iterate over them, rather than all at once.
+    Data Structure: The result is a generator, which is an iterator that yields items one at a time.
+
+        lazy_squares = (x**2 for x in range(5))
+### Reading a file 
+    # Without lazy iterator
+    with open('large_file.txt', 'r') as file:
+        lines = file.readlines()
+        for line in lines:
+            print(line.strip())
+
+    # Using lazy iterator
+    def read_file(file_path):
+        with open(file_path, 'r') as file:
+            for line in file:
+                yield line.strip()
+    
+    for line in read_file('large_file.txt'):
+        print(line)
+
+### filtering even number
+
+        # Without lazy iterator
+    numbers = [x for x in range(10) if x % 2 == 0]
+    print(numbers)
+
+    # Using lazy iterator
+    def even_numbers(n):
+        for x in range(n):
+            if x % 2 == 0:
+                yield x
+    
+    for number in even_numbers(10):
+        print(number)
+
+
+
+
+
+    
+
+
 # 🌞🌞🌞 UNDERSTANDING CLASS CALLING 🌞🌞🌞:
 
 **attributes** : Attributes are variables that belong to an object or class. They are used to store data that is associated with an instance of a class.
@@ -562,6 +668,7 @@ Also one more advantages of get setter is, the validation happens properly... if
 ### @property:
 
 using @ property, u can simply call c.area in above code instead of c.area().
+
     @property
     def area(self):
         return self._area
