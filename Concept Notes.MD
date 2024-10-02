@@ -136,47 +136,6 @@ The range() function in Python cannot be directly used with strings because it o
     for i in range(len(s)):
         print(s[i])
 
-
-# generator object 
-
-A generator object in Python is a special type of iterator that allows you to iterate over a sequence of values lazily, meaning it generates values on the fly and only when needed. This can be very memory efficient, especially when dealing with large datasets. 
-
-
-A generator function is defined like a normal function but uses the **yield** statement to return values one at a time.
-
-    def count_up_to(max):
-        count = 1
-        while count <= max:
-            yield count
-            count += 1
-
-    # Create a generator object
-    counter = count_up_to(5)
-
-    # Iterate over the generator
-    for num in counter:
-        print(num)
-
-# list comprehension vs generator
-
-If you only need to iterate over the sequence once and want to save memory, use a generator expression. If you need to access the elements multiple times or perform operations that require the entire sequence, use a list comprehension.
-
-    squares_gen = (x**2 for x in range(10))
-    for square in squares_gen:
-        print(square)
-    # Trying to iterate again will yield no results
-    for square in squares_gen:
-        print(square)  # No output
-
-    
-    squares = [x**2 for x in range(10)]
-    for square in squares:
-        print(square)
-    # You can iterate again
-    for square in squares:
-        print(square)  # Output: 0 1 4 9 16 25 36 49 64 81
-
-
 # zip
 
 The zip() function takes multiple iterables (like lists, tuples, etc.) and returns an iterator of tuples, where the i-th tuple contains the i-th element from each of the input iterables.
@@ -279,19 +238,133 @@ is a **cummulative** function that Aggregates all elements in an iterable into a
 
 Should return a string that ideally looks like a valid Python expression to recreate the object.
 
-class Person:
-    def __init__(self, name, age):
-        self.name = name
-        self.age = age
+    class Person:
+        def __init__(self, name, age):
+            self.name = name
+            self.age = age
+    
+        def __repr__(self):
+            return f"Person(name='{self.name}', age={self.age})"
+    
+    # Creating an instance of the Person class
+    person = Person("Alice", 30)
+    
+    # Using repr() to get the string representation
+    print(repr(person))  # Output: Person(name='Alice', age=30)
 
-    def __repr__(self):
-        return f"Person(name='{self.name}', age={self.age})"
+#🌞🌞🌻 ALL ABOUT ITER AND NEXT: 
 
-# Creating an instance of the Person class
-person = Person("Alice", 30)
+Python’s built-in iterators for lists, tuples, strings, etc., already have the __iter__() and __next__() methods implemented. 
 
-# Using repr() to get the string representation
-print(repr(person))  # Output: Person(name='Alice', age=30)
+##### non custom class usage :
+    The iter() function can be used outside of classes to create an iterator from any iterable object, such as lists, tuples, strings, and more. These iterators have the __iter__() and __next__() methods built-in.
+
+    #example 1:
+    my_list = [1, 2, 3]
+    iterator = iter(my_list)
+
+    print(next(iterator))  # Output: 1
+    print(next(iterator))  # Output: 2
+    print(next(iterator))  # Output: 3
+    # If you call next(iterator) again, it will raise StopIteration
+
+    #example 2:
+    from collections import namedtuple
+
+    def cast(data_type, value):
+        if data_type == 'DOUBLE':
+            return float(value)
+        elif data_type == 'INT':
+            return int(value)
+        else:
+            return str(value)
+        
+    def cast_row(data_types, data_row):
+        return [cast(data_type, value) 
+                for data_type, value in zip(data_types, data_row)]
+        
+    cars = []
+    with open('cars.csv') as file:
+        file_iter = iter(file)
+        headers = next(file_iter).strip('\n').split(';')
+        Car = namedtuple('Car', headers)
+        data_types = next(file_iter).strip('\n').split(';')
+        for line in file_iter:
+            data = line.strip('\n').split(';')
+            data = cast_row(data_types, data)
+            car = Car(*data)
+            cars.append(car)
+    cars[0]
+
+##### custom class usage:
+
+When you create your own classes and want them to be iterable, you need to implement these methods yourself using __next__() and __iter__() inside your class. 
+
+
+# __iter__():
+
+usually __iter__() returns self making the entire instance of class iterable. The __iter__ method itself does not perform iteration; it simply returns an iterator. For the iteration to work, the returned iterator must implement the __next__ method. So __iter__() cannot work independentaly. When you create a custom class that represents a collection of items, implementing __iter__ allows you to use it in a for loop or any other context that expects an iterable.
+
+# __next__():
+
+The __next__ method is responsible for returning the next item in the sequence and raising a StopIteration exception when there are no more items. next can work independently. 
+
+    if i need to iterate over instance of class using for loop then. i need iter.. but if i am calling instance of the class without using for loop using 
+    
+    # direct calls like below.
+
+    class Squares:
+    def __init__(self, length):
+        self.length = length
+        self.i = 0
+    
+    def __next__(self):
+        if self.i >= self.length:
+            raise StopIteration
+        else:
+            result = self.i ** 2
+            self.i += 1
+            return result   
+    
+    def __len__(self):
+        return self.length
+
+    squares = Squares(5)
+
+    # Using next() directly
+    print(next(squares))  # Output: 0
+    print(next(squares))  # Output: 1
+    print(next(squares))  # Output: 4
+    print(next(squares))  # Output: 9
+    print(next(squares))  # Output: 16
+    # The next call will raise StopIteration
+
+    # iterating over instance of a class
+
+    class Squares:
+    def __init__(self, length):
+        self.length = length
+        self.i = 0
+    
+    def __iter__(self):
+        self.i = 0  # Reset the counter
+        return self
+    
+    def __next__(self):
+        if self.i >= self.length:
+            raise StopIteration
+        else:
+            result = self.i ** 2
+            self.i += 1
+            return result   
+    
+    def __len__(self):
+        return self.length
+
+    squares = Squares(5)
+    for square in squares:
+        print(square)
+
 
 # ARGUMENTS OF A FUNCTION:
 
@@ -312,8 +385,76 @@ print(repr(person))  # Output: Person(name='Alice', age=30)
     result = add(a=2, b=3)
     print(result)  # Output: 5
 
+#🍄🍄🍄 GENERATORS:
 
-# UNDERSTANDING CLASS CALLING:
+A generator object in Python is a special type of iterator that allows you to iterate over a sequence of values lazily, meaning it generates values on the fly and only when needed. This can be very memory efficient, especially when dealing with large datasets.A generator function is defined like a normal function but uses the **yield** statement to return values one at a time.
+
+    def count_up_to(max):
+        count = 1
+        while count <= max:
+            yield count
+            count += 1
+
+    # Create a generator object
+    counter = count_up_to(5)
+
+    # Iterate over the generator
+    for num in counter:
+        print(num)
+
+# list comprehension vs generator
+
+If you only need to iterate over the sequence once and want to save memory, use a generator expression. If you need to access the elements multiple times or perform operations that require the entire sequence, use a list comprehension.
+
+    squares_gen = (x**2 for x in range(10))
+    for square in squares_gen:
+        print(square)
+    # Trying to iterate again will yield no results
+    for square in squares_gen:
+        print(square)  # No output
+
+    
+    squares = [x**2 for x in range(10)]
+    for square in squares:
+        print(square)
+    # You can iterate again
+    for square in squares:
+        print(square)  # Output: 0 1 4 9 16 25 36 49 64 81
+
+
+Using a generator simplifies the implementation of the Deck class by eliminating the need to manually manage the __iter__ and __next__ methods.
+
+    type: 1
+        class Squaresss:
+        def __init__(self, length):
+            self.length = length
+            # self.i = 0
+        
+        def __iter__(self):
+            # self.i = 0  # Reset the counter
+            for i in range(self.length):
+                yield i ** 2
+
+        squares = Squaresss(5)
+        for square in squares:
+            print(square)
+
+    type 2:
+        class Squares_sides:
+        def __init__(self):
+            self.sides = [2,4,5,7,8,9]
+            # self.i = 0
+        
+        def __iter__(self):
+            # self.i = 0  # Reset the counter
+            for i in self.sides:
+                yield i ** 2
+
+        sq = Squares_sides()
+        for square in sq:
+            print(square)
+
+#✨✨🌟 UNDERSTANDING CLASS CALLING:
 
 **attributes** : Attributes are variables that belong to an object or class. They are used to store data that is associated with an instance of a class.
 **parameters** : Parameters are variables that are used in function or method definitions to accept input values. They are placeholders for the arguments that will be passed to the function or method.
@@ -330,31 +471,31 @@ Absolutely, I’d be happy to explain this concept in detail! When you call a cl
             self.attribute3 = attribute3
             self.class1_instance = Class1(attribute1, attribute2)
 
-instance_of_class2 = Class2(attribute3_value, attribute1_value, attribute2_value)
+    instance_of_class2 = Class2(attribute3_value, attribute1_value, attribute2_value)
 
-
-class Engine:
-    def __init__(self, horsepower, type):
-        self.horsepower = horsepower
-        self.type = type
-
-    def start(self):
-        return "Engine started"
-
-class Car:
-    def __init__(self, make, model, horsepower, engine_type):
-        self.make = make
-        self.model = model
-        self.engine = Engine(horsepower, engine_type)
-
-    def start_car(self):
-        return f"{self.make} {self.model} with {self.engine.horsepower} HP {self.engine.type} engine: {self.engine.start()}"
-
-    # Create an instance of Car
-    my_car = Car("Toyota", "Camry", 301, "V6")
-
-    # Access attributes and methods
-    print(my_car.start_car())
+-------------------------------------------------------------------------------
+    class Engine:
+        def __init__(self, horsepower, type):
+            self.horsepower = horsepower
+            self.type = type
+    
+        def start(self):
+            return "Engine started"
+    
+    class Car:
+        def __init__(self, make, model, horsepower, engine_type):
+            self.make = make
+            self.model = model
+            self.engine = Engine(horsepower, engine_type)
+    
+        def start_car(self):
+            return f"{self.make} {self.model} with {self.engine.horsepower} HP {self.engine.type} engine: {self.engine.start()}"
+    
+        # Create an instance of Car
+        my_car = Car("Toyota", "Camry", 301, "V6")
+    
+        # Access attributes and methods
+        print(my_car.start_car())
 
 # use of isinstance() inside class:
 
@@ -370,13 +511,14 @@ class MyClass:
         self.data = data
         self.threshold = threshold
 
+#🌈🌈 DECORATOR UNDERSTANDING:
 # using get and setter method inside class also help of property decorator:
 
 In the below class, we can see that width is initialized inside the init and also inside the setter method. this is because, initialization within the setter method helps to update the area automatically once the width is changed when isntance of class is called. 
 
 Also one more advantages of get setter is, the validation happens properly... if u assign value that is non negative then it will throw error. while i tested if u do it using isinstance method like this 
 
-    " def __init__(self, r):
+    def __init__(self, r):
         if isinstance (r, int) and r > 0:
             self.radius = r
         else:
@@ -501,6 +643,8 @@ This method returns the number of polygons in the Polygon_sequence instance. sin
 # __getitem__():
 
 The __getitem__ method allows an instance of your class to support indexing, like a list or tuple. This method should return the item at the specified index.
+The __getitem__ method allows an object to use the indexing syntax (obj[key]) to retrieve items. __getitem__ and __len__ together is an alternative of __iter__ and __next__
+
 
     def __getitem__(self, index):
     return self.polygons[index]
@@ -510,7 +654,7 @@ The __getitem__ method allows an instance of your class to support indexing, lik
 
     polygon_seq[0] returns the first polygon in the sequence.
 
-# INIT CONSTRUCTOR: 
+# __init__(): 
 
 1. **Attributes Used Across Methods:**
         Initialize: If an attribute is used in multiple methods, it should be initialized in the __init__ method. This ensures that the attribute is available and has a defined state whenever it is accessed.
@@ -537,42 +681,42 @@ Python’s built-in iterators for lists, tuples, strings, etc., already have the
 ##### non custom class usage :
     The iter() function can be used outside of classes to create an iterator from any iterable object, such as lists, tuples, strings, and more. These iterators have the __iter__() and __next__() methods built-in.
 
-        #example 1:
-        my_list = [1, 2, 3]
-        iterator = iter(my_list)
+    #example 1:
+    my_list = [1, 2, 3]
+    iterator = iter(my_list)
 
-        print(next(iterator))  # Output: 1
-        print(next(iterator))  # Output: 2
-        print(next(iterator))  # Output: 3
-        # If you call next(iterator) again, it will raise StopIteration
+    print(next(iterator))  # Output: 1
+    print(next(iterator))  # Output: 2
+    print(next(iterator))  # Output: 3
+    # If you call next(iterator) again, it will raise StopIteration
 
-        #example 2:
-        from collections import namedtuple
+    #example 2:
+    from collections import namedtuple
 
-        def cast(data_type, value):
-            if data_type == 'DOUBLE':
-                return float(value)
-            elif data_type == 'INT':
-                return int(value)
-            else:
-                return str(value)
-            
-        def cast_row(data_types, data_row):
-            return [cast(data_type, value) 
-                    for data_type, value in zip(data_types, data_row)]
-            
-        cars = []
-        with open('cars.csv') as file:
-            file_iter = iter(file)
-            headers = next(file_iter).strip('\n').split(';')
-            Car = namedtuple('Car', headers)
-            data_types = next(file_iter).strip('\n').split(';')
-            for line in file_iter:
-                data = line.strip('\n').split(';')
-                data = cast_row(data_types, data)
-                car = Car(*data)
-                cars.append(car)
-        cars[0]
+    def cast(data_type, value):
+        if data_type == 'DOUBLE':
+            return float(value)
+        elif data_type == 'INT':
+            return int(value)
+        else:
+            return str(value)
+        
+    def cast_row(data_types, data_row):
+        return [cast(data_type, value) 
+                for data_type, value in zip(data_types, data_row)]
+        
+    cars = []
+    with open('cars.csv') as file:
+        file_iter = iter(file)
+        headers = next(file_iter).strip('\n').split(';')
+        Car = namedtuple('Car', headers)
+        data_types = next(file_iter).strip('\n').split(';')
+        for line in file_iter:
+            data = line.strip('\n').split(';')
+            data = cast_row(data_types, data)
+            car = Car(*data)
+            cars.append(car)
+    cars[0]
 
 ##### custom class usage:
 
@@ -591,70 +735,60 @@ The __next__ method is responsible for returning the next item in the sequence a
     
     # direct calls like below.
 
-        class Squares:
-        def __init__(self, length):
-            self.length = length
-            self.i = 0
-        
-        def __next__(self):
-            if self.i >= self.length:
-                raise StopIteration
-            else:
-                result = self.i ** 2
-                self.i += 1
-                return result   
-        
-        def __len__(self):
-            return self.length
+    class Squares:
+    def __init__(self, length):
+        self.length = length
+        self.i = 0
+    
+    def __next__(self):
+        if self.i >= self.length:
+            raise StopIteration
+        else:
+            result = self.i ** 2
+            self.i += 1
+            return result   
+    
+    def __len__(self):
+        return self.length
 
-        squares = Squares(5)
+    squares = Squares(5)
 
-        # Using next() directly
-        print(next(squares))  # Output: 0
-        print(next(squares))  # Output: 1
-        print(next(squares))  # Output: 4
-        print(next(squares))  # Output: 9
-        print(next(squares))  # Output: 16
-        # The next call will raise StopIteration
+    # Using next() directly
+    print(next(squares))  # Output: 0
+    print(next(squares))  # Output: 1
+    print(next(squares))  # Output: 4
+    print(next(squares))  # Output: 9
+    print(next(squares))  # Output: 16
+    # The next call will raise StopIteration
 
     # iterating over instance of a class
 
-        class Squares:
-        def __init__(self, length):
-            self.length = length
-            self.i = 0
-        
-        def __iter__(self):
-            self.i = 0  # Reset the counter
-            return self
-        
-        def __next__(self):
-            if self.i >= self.length:
-                raise StopIteration
-            else:
-                result = self.i ** 2
-                self.i += 1
-                return result   
-        
-        def __len__(self):
-            return self.length
+    class Squares:
+    def __init__(self, length):
+        self.length = length
+        self.i = 0
+    
+    def __iter__(self):
+        self.i = 0  # Reset the counter
+        return self
+    
+    def __next__(self):
+        if self.i >= self.length:
+            raise StopIteration
+        else:
+            result = self.i ** 2
+            self.i += 1
+            return result   
+    
+    def __len__(self):
+        return self.length
 
-        squares = Squares(5)
-        for square in squares:
-            print(square)
-
-# __getitem__():
-    The __getitem__ method allows an object to use the indexing syntax (obj[key]) to retrieve items.
-
-    __getitem__ and __len__ together is an alternative of __iter__ and __next__
-
-
-
+    squares = Squares(5)
+    for square in squares:
+        print(square)
 
     
-
-
-### ITERATING CLASS INSIDE A CLASS:
+#🍀🍀🌲 ITERATING CLASS INSIDE A CLASS:
 
 Steps:
 **Define the Iterable Class:**
@@ -668,42 +802,9 @@ Steps:
 
  *** An iterable is an object that returns an iterator ***
 
-# GENERATORS:
-
-    Using a generator simplifies the implementation of the Deck class by eliminating the need to manually manage the __iter__ and __next__ methods.
-
-    type: 1
-        class Squaresss:
-        def __init__(self, length):
-            self.length = length
-            # self.i = 0
-        
-        def __iter__(self):
-            # self.i = 0  # Reset the counter
-            for i in range(self.length):
-                yield i ** 2
-
-        squares = Squaresss(5)
-        for square in squares:
-            print(square)
-
-    type 2:
-        class Squares_sides:
-        def __init__(self):
-            self.sides = [2,4,5,7,8,9]
-            # self.i = 0
-        
-        def __iter__(self):
-            # self.i = 0  # Reset the counter
-            for i in self.sides:
-                yield i ** 2
-
-        sq = Squares_sides()
-        for square in sq:
-            print(square)
 
 
-# CONTEXT MANAGER:
+#⚡️❄️❄️ CONTEXT MANAGER:
 ###### Contextmanager module from contextlib
 The @contextmanager decorator from the contextlib module allows you to convert a regular function into a context manager. This can be very convenient because it simplifies the creation of context managers, making your code more readable and maintainable.  Apply the @contextmanager decorator to the function to convert it into a context manager.
 
@@ -767,10 +868,3 @@ contxt manager used for below cases by default:
 
 
 ### Practical example of why context manager is essential: we need to run ML model in cloud AWS. AWS charges as long as GPU is live. If we push file to AWS , and if  say the file crashes and if we do not close the connection and then AWS charges
-
-
-# DECORATOR:
-
-The *@property* Decorator:
-
-    The @property decorator allows you to define a method that can be accessed like an attribute. This is useful for controlling access to an attribute and adding logic when the attribute is accessed. Here’s the first part of your code:
