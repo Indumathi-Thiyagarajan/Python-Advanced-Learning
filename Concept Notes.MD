@@ -255,6 +255,7 @@ Should return a string that ideally looks like a valid Python expression to recr
 # 🌞🌞🌞 ALL ABOUT ITER AND NEXT 🌞🌞🌞: 
 
 Python’s built-in iterators for lists, tuples, strings, etc., already have the __iter__() and __next__() methods implemented. 
+*** An iterable is an object that return iterator ***. All the materials in the iterables should be predefined. 
 
 ### non custom class usage :
     The iter() function can be used outside of classes to create an iterator from any iterable object, such as lists, tuples, strings, and more. These iterators have the __iter__() and __next__() methods built-in.
