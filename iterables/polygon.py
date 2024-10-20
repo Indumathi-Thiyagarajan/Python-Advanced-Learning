@@ -55,29 +55,36 @@ class Polygon:
         else:
             return NotImplemented
         
-        
+""" Transforming a sequence into an iterator in Python is quite straightforward. Here’s the playbook:
+
+Identify your sequence: This could be a list, tuple, string, etc.
+
+Use the iter() function: This built-in function converts your sequence into an iterator."""       
 class Polygon_iter:
-    def __init__(self, m, R):
-        if m < 3:
-            raise ValueError('m must be greater than 3')
-        self._m = m
+    def __init__(self, n, R=10):
+        if n < 3:
+            raise ValueError('Polygon must have at least 3 vertices.')
+        self._n = n
         self._R = R
-        self._polygons = [Polygon(i, R) for i in range(3, m+1)]
-        self._index = 0
-    def __iter__(self):
-        return self
-    
-    def __next__(self):
-        if self._index >= len(self._polygons):
-            raise StopIteration
-        else:
-            item = self._polygons[self._index]
-            self._index += 1
-            return item
-    
-    @property
+        self.polygons = [Polygon(n,R) for n in range(3,n+1)]
+        
     def max_efficiency_polygon(self):
-        sorted_polygons = sorted(self._polygons, 
-                                 key=lambda p: p.area/p.perimeter,
-                                reverse=True)
-        return sorted_polygons[0]
+        efficiency_list = ()
+        for polygon in self.polygons:
+            area = polygon.area
+            perimeter = polygon.perimeter
+            efficiency = area/perimeter
+            efficiency_list = ((polygon._n,efficiency) if not efficiency_list or efficiency > efficiency_list[1] else efficiency_list)
+        return f"Polygon with {efficiency_list[0]} edges and {self._R} has maximum efficiency"
+    
+    def __repr__(self):
+        return f'Polygon_sequence(n={self._n}, R={self._R}, max_efficiency_polygon={self.max_efficiency_polygon()})'
+    
+    def __len__(self):
+        return len(self.polygons)
+    
+    def __getitem__(self, index):
+        return self.polygons[index]
+    
+    def __iter__(self):
+        return iter(self.polygons) #this convert a sequence into an iterator
