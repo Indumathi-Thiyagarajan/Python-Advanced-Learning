@@ -118,8 +118,15 @@ class CSV_Reader_contextmanager:
         return self
 
     def __next__(self):
+        """self.csv_reader() initializes the reader if it hasn't been done yet. This way, the CSV reader is set up only when it’s needed, avoiding unnecessary initialization
+            With Context Manager:
+            When using a context manager, the file handling and initialization are managed by the context manager itself. 
+            By the time you call __next__, the reader should have already been initialized within the context of the with statement. 
+            Hence, if self._reader is None, it indicates an error or that you're outside the context manager’s scope, so you raise StopIteration immediately:"""
+        
         if self._reader is None:
-            raise StopIteration  # Ensure reader is initialized in the context manager
+            raise StopIteration  # Ensure reader is initialized in the context manager 
+            # When not using context manager, here instead of raise stopiteration it will be self.csv_reader() being called. explained above
         try:
             current_row = next(self._reader)
             cleaned_row = tuple(self.column_datatype_cleaning(current_row))
