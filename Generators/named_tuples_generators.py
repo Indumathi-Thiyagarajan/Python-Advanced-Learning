@@ -57,6 +57,8 @@ for car_details in csv_data:
 
 # to calculate vioolations made by car make with generator
 
+# default dict is used to avoid key error while initializing, errors out whne key is empty
+
 from collections import defaultdict
 def violation_made_by_make(file_path):
     csv_reader = CSV_Reader(file_path)
