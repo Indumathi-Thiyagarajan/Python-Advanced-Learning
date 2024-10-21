@@ -12,16 +12,16 @@ Initialization:
 
 Remove Precomputed List:
 
-  Instead of precomputing and storing all polygons, we generate them on-the-fly.
+    Instead of precomputing and storing all polygons, we generate them on-the-fly.
 
 Implement __iter__:
 
-  Returns self because this object itself is an iterator.
+    Returns self because this object itself is an iterator.
 
 Implement __next__:
 
-  Generates the next polygon and increments the _current counter.
+    Generates the next polygon and increments the _current counter.
 
 Raises StopIteration when the end is reached.
 
-  when next is there we return self. when next is not there we return self og iterator
+    when next is there we return self. when next is not there we return self og iterator
