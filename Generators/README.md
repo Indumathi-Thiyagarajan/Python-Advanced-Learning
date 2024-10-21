@@ -1,3 +1,11 @@
+Key things to note about generators:
+
+        Reading Files: When processing large text files, yield lines instead of loading the entire file.
+
+        Streaming Data: For real-time data processing, where data arrives continuously (like logs or network packets).
+        
+        Combinatorial Generations: For generating combinations, permutations, or Cartesian products without precomputing them.
+
 Named Tuples:
     Lightweight: They consume less memory compared to DataFrames. Perfect for small datasets.
     
