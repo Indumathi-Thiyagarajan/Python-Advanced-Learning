@@ -1,11 +1,8 @@
-
-# Goal 1:
-
 import csv
 from collections import namedtuple
 import pandas as pd
 
-class csv_reader:
+class CSV_Reader:
     def __init__(self, fname):
         self._fname = fname
         self._file = None
@@ -50,25 +47,32 @@ class csv_reader:
             self._file.close()  # Close the file when done
             raise StopIteration
 
+# Example usage
+file_path = r'/Users/indu/EPAi/generator_Assignment/nyc_parking_tickets_extract-1.csv'
+csv_data = CSV_Reader(file_path)
 
-# goal 2:
+for car_details in csv_data:
+    print(car_details)
+
+
+# to calculate vioolations made by car make with generator
 
 from collections import defaultdict
 def violation_made_by_make(file_path):
     csv_reader = CSV_Reader(file_path)
-    violation_made = {}
+    violation_made = defaultdict(int)
 
     for car_row in csv_reader:
-        if car_row.Vehicle_Make not in violation_made:
-            violation_made[car_row.Vehicle_Make] = 1
         violation_made[car_row.Vehicle_Make] += 1
-    return violation_made    
+        yield car_row.Vehicle_Make, violation_made[car_row.Vehicle_Make]
+
 file_path = r'/Users/indu/EPAi/generator_Assignment/nyc_parking_tickets_extract-1.csv'
-violation = violation_made_by_make(file_path)
 
-print(violation)
+for make, count in violation_made_by_make(file_path):
+    print(f"{make}: {count} violations")
 
-#alternative approach to avoid missing key error without if loop is using defaultdict 
+
+# to calculate same without using default dict and non generator
 
 from collections import defaultdict
 def violation_made_by_make(file_path):
