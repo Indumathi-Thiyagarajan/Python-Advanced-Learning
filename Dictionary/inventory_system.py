@@ -1,3 +1,4 @@
+
 # inventory_system.py
 
 def create_inventory():
