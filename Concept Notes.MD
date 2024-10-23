@@ -976,3 +976,201 @@ contxt manager used for below cases by default:
 
 
 ### Practical example of why context manager is essential: we need to run ML model in cloud AWS. AWS charges as long as GPU is live. If we push file to AWS , and if  say the file crashes and if we do not close the connection and then AWS charges
+
+
+🌞🌞🌞 HASHING and DICTIONARY🌞🌞🌞 :
+
+1) anything that is immutable is hashed and anything that can be hashed  can become key of dictionary. It can be tuple, string or a function or anything that is immutable 
+        example : a = {('a',100):['a','b','c'], 'key2': ('a',100):[1,2,3]}
+
+        def fn_add (a,b):
+            return a+b
+        funcs_dic = {fn_add:(10,20) , fn_inv(2,)}
+
+        for f in funcs:
+        print
+
+# creating dictionary:
+    ### method 1:
+        key = ['fn_add', 'fn_inv', 'fn_mult']
+        values = ((10,20), (2,), (2,8))
+        funcs = dict(zip(key, values))
+
+        d ={}
+        for key , values in zip(key, values):
+            d[key] = values
+    
+    ### method 2:
+
+        counters = dict.fromkeys(['a', 'b', 'c'], 0)
+        
+        
+    ### method 3:
+
+        d = dict(zip('abc', range(1,4)))
+        
+
+    """ Note: if you are accessing a key of the dictionary and if the key is not present in the dictionary, it will throw an error. To avoid this, 
+    try d = d.pop('a', 0) which will return 0 if the key is not present in the dictionary. If the key is present, it will return the value of the key.
+    d = d.get('a', 0) will also return 0 if the key is not present in the dictionary. If the key is present, it will return the value of the key."""
+    
+    """
+        d = {'a': 1, 'b': 2, 'c': 3}
+        d.pop('a', 0) # 1 #returns the value of the key and deletes the key
+        del d['a'] # doesnt return value just deletes
+        d.popitem() # removes the last item from the dictionary. It returns the key and value of the last item including key and value
+        d.clear() # clears the dictionary
+        
+    """
+
+# accessing dictionary:
+        def fn_add(a, b):
+            return a + b
+
+        def fn_inv(a):
+            return 1/a
+
+        def fn_mult(a, b):
+            return a * b
+        funcs = {fn_add: (10, 20), fn_inv: (2,), fn_mult: (2, 8)}
+        for f in funcs:
+            print("f",f) #function fn_add, fn_inv, fn_mult
+            print("funcs[f]",funcs[f]) #values of the key of the function fn_add, fn_inv, fn_mult
+            print("f(*funcs[f])",f(*funcs[f])) #calling the function with the values of the key , * is used to unpack the tuple
+            result = f(*funcs[f])
+            print(result)
+    
+        ### method 2:
+
+        for key, values in funcs.items():
+            result = key(*values)
+            print(result)
+            
+        ### method 3:
+        d = {'a': 1, 'b': 2, 'c': 3}
+        d.get('a') # 1
+                    
+        
+   
+# similar to list comprehension, we can also make dictionary comprehension
+
+list_comp = [i**2 for i in range(10)]
+[0, 1, 4, 9, 16, 25, 36, 49, 64, 81]
+
+dict_comp = {i: i**2 for i in range(10)}
+{0: 0, 1: 1, 2: 4, 3: 9, 4: 16, 5: 25, 6: 36, 7: 49, 8: 64, 9: 81}
+
+dict_comp = {k:v for k,v in zip(key, values) if v %2 == 0}
+
+
+# nested list comprehension
+
+x_i = (1,2,3,4)
+y_i = (5,6,7,8)
+
+result = [(x,y) 
+          for x in x_i
+          for y in y_i]
+print(result)
+
+
+# iterating over and creating dictionary:
+    ### method 1:
+        text = 'Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt, explicabo. Nemo enim ipsam voluptatem, quia voluptas sit, aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos, qui ratione voluptatem sequi nesciunt, neque porro quisquam est, qui dolorem ipsum, quia dolor sit amet consectetur adipisci[ng] velit, sed quia non-numquam [do] eius modi tempora inci[di]dunt, ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?'
+        counts = dict()
+        for c in text:
+            c = c.lower().strip()
+            if c:
+                counts[c] = counts.get(c, 0) + 1
+        print(counts)
+
+    ### method 2:
+        from collections import defaultdict
+        counts_Def = defaultdict(int)
+        for c in text:
+            counts_Def[c] += 1
+        print(counts_Def)
+        
+    ### method 3:
+
+        count_setdef = {}
+        for c in text:
+            c = c.lower().strip()
+            if c:
+                count_setdef[c]=count_setdef.setdefault(c, 0)+1
+        print(count_setdef)
+        
+
+#### example usage:
+
+categories = {}
+for c in text:
+    if c != ' ':
+        if c in string.ascii_lowercase:
+            key = 'lower'
+        elif c in string.ascii_uppercase:
+            key = 'upper'
+        else:
+            key = 'other'
+        categories.setdefault(key, set()).add(c)
+
+for cat in categories:
+    print(f'{cat}:', ''.join(categories[cat]))
+                
+
+# inserting into dictionary:
+
+    ### method 1:
+          
+        d = {'a': 1, 'b': 2, 'c': 3}
+        res_d = d.setdefault('d', 4) 
+        # if the key is not present in the dictionary, it will insert the key and value into the dictionary and return the value of the key
+        
+# updating dictionary:
+
+        d1 = {'a': 1, 'b': 2}
+        d1.update(b=20, c=30)
+        print(d1)
+        
+        d1.update((key,ord(key)) for key in 'abc') # ord get the ascii value of the key
+        
+
+# combining two dictionaries:
+
+        d1 = {'a': 1, 'b': 2}
+        d2 = {'c': 3, 'd': 4}
+        d = {**d1, **d2}
+        print(d)
+        
+        
+        ### example 2:
+        
+        conf_defaults = dict.fromkeys(('host', 'port', 'user', 'pwd', 'database'), None)
+        print(conf_defaults)
+
+        conf_global = {
+            'port': 5432,
+            'database': 'deepdive'}
+
+        conf_dev = {
+            'host': 'localhost',
+            'user': 'test',
+            'pwd': 'test'
+        }
+
+        conf_prod = {
+            'host': 'ironman.aws.com',
+            'user': '$prod_user',
+            'pwd': '$prod_pwd',
+            'database': 'deepdive_prod'
+        }
+
+        config_dev = {**conf_defaults, **conf_global, **conf_dev}
+        config_dev
+
+        config_prod = {**conf_defaults, **conf_global, **conf_prod}
+        config_prod
+        
+    
+
+
