@@ -1,3 +1,4 @@
+**Everything is an object**
 
 ### Sequence:
 A sequence is a general term for an ordered collection of items. Python sequences include lists, tuples, strings, ranges, and more. A list is a specific type of sequence that is mutable, meaning its contents can be changed after creation."""
