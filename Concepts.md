@@ -1,26 +1,64 @@
-Here’s a more detailed breakdown of the concepts for better clarity, especially on advanced topics:
 
 ## Everything is an object
-- Every entity in Python, from integers to classes, is an object with a unique memory address, making it easy to assign, pass, or return from functions. 
+- Every entity in Python, from integers to classes, is an object with a unique memory address, making it easy to assign, pass, or return from functions.
+- When we are assigning a =6 its not a being assigned to 6. Its just that a is pointing to memory address where a is stored. 
 - **Interning:** Python optimizes memory usage by reusing the same memory location for small integers (-5 to 256) and frequently used strings upto 4096 char length.
 - **Parameters** belong to methods (inside the class).
 - **Attributes** belong to the instance (object) of the class.
 - **Functions** are independent and do not belong to a class.
 - **Methods** are functions inside a class and must be called with an instance.
 - **class** is a blueprint for creating objects. It defines attributes (variables) and methods (functions inside the class).
+- **Module** is a file that is stored in python memory that can be imported. It can also be a .py file stored manually by you in your working environment.
   
 ## Immutability and Mutability
 - **Immutable:** Tuples, strings, and integers. Immutable objects can’t be changed after creation, making them fast and ideal for constant values in multimedia/games.
 - **Mutable:** Lists. These can be modified after creation. For mutable objects, any modification affects the original object directly when passed into a function.
+- ** Unsubcriptable:** Sets are unsubsriptible , in the process of keep non duplicate unique values inside, it changes the index of object inside so making it unsubscriptble
 
-### Data Structures
-- **Tuple:** Immutable, suitable for storing constant data.
-- **List:** Mutable, allows modification after creation.
-- **Set:** Unsubscriptable, holds unique elements, useful for removing duplicates.
+## Data Structures
+categorized as linear and non-linear structures.
+
+1️⃣ Linear Data Structures
+
+    List (list) – Ordered, mutable, allows duplicates.  
+    Tuple (tuple) – Ordered, immutable, allows duplicates.
+    String (str) – Ordered, immutable sequence of characters.
+    Stack (list or collections.deque) – Follows LIFO (Last In, First Out).
+    Queue (collections.deque or queue.Queue) – Follows FIFO (First In, First Out).
+
+2️⃣ Non-Linear Data Structures
+
+    Set (set) – Unordered, mutable, unique elements.
+    Dictionary (dict) – Key-value pairs, ordered (since Python 3.7+), mutable.
+    Graph (dict with lists/sets) – Nodes and edges representation.
+    Tree (Custom implementation) – Hierarchical structure with parent-child relationships.
   
-### Python Behavior (Pass by Object Reference)
-- **Immutable Objects:** Passed by value-like behavior (modifications create new objects).
-- **Mutable Objects:** Passed by reference (modifications affect the original).
+## Python Behavior (Pass by Object Reference)
+Python behavior is pass by object references. Variables are references to objects in memory. When passing arguments to functions, you're passing these references. 
+
+1️⃣ Immutable objects ( str, int and tuple), these behaves like pass by value behaviour. So any modification creates a new object, leaving the original unchanged. But when u are assigning the fucntion to a new variable it creates a new object, so then it wil change.before and after function prints same number, the num variable is unchange. But when u assign it to new varibale ass it becomes new object and get new value assigned. 
+          
+    def modify_integer(x):
+        x += 1
+        print(f"Inside function: {x}")
+        return x
+    num = 5
+    print(f"Before function: {num}")
+    modify_integer(num)
+    print(f"After function: {num}")
+    ass = modify_integer(num)
+    print(f" assigning integer: {ass}")                                      
+                        
+2️⃣ For mutable objects, modifications affect the original object directly. 
+
+    def modify_list(lst):
+      lst.append(4)
+      print(f"Inside function: {lst}")
+  
+    my_list = [1, 2, 3]
+    print(f"Before function: {my_list}")
+    modify_list(my_list)
+    print(f"After function: {my_list}")
 
 ### Functions and Methods
 - **Appending vs Extending:** `append()` adds a single element, while `extend()` adds multiple elements.
