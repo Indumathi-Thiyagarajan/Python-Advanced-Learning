@@ -1,4 +1,8 @@
-**Everything is an object**
+# SUMMARY:
+
+* Everything is an object means all objects can be assigned to variables, passed as arguments, or returned from functions. Most elements have attributes and methods that can be accessed using dot notation
+
+Attributes and methods: Most elements have attributes and methods that can be accessed using dot notation.7
 
 * Tuple is immutable, list is mutable. Mutable means we can modify where as immutable means its not changeable which is gonna make it super fast. Used in games and multi media where speed is important. 
 
