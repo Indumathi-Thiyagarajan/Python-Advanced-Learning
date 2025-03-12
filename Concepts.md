@@ -1,7 +1,7 @@
 
 ## Everything is an object
 - Every entity in Python, from integers to classes, is an object with a unique memory address, making it easy to assign, pass, or return from functions.
-- When we are assigning a =6 its not a being assigned to 6. Its just that a is pointing to memory address where a is stored. 
+- When we are assigning a=6 its not a being assigned to 6. Its just that a is pointing to memory address where a is stored. 
 - **Interning:** Python optimizes memory usage by reusing the same memory location for small integers (-5 to 256) and frequently used strings upto 4096 char length.
 - **Parameters** belong to methods (inside the class).
 - **Attributes** belong to the instance (object) of the class.
@@ -13,7 +13,7 @@
 ## Immutability and Mutability
 - **Immutable:** Tuples, strings, and integers. Immutable objects can’t be changed after creation, making them fast and ideal for constant values in multimedia/games.
 - **Mutable:** Lists. These can be modified after creation. For mutable objects, any modification affects the original object directly when passed into a function.
-- ** Unsubcriptable:** Sets are unsubsriptible , in the process of keep non duplicate unique values inside, it changes the index of object inside so making it unsubscriptble
+- **Unsubcriptable:** Sets are unsubsriptible , in the process of keep non duplicate unique values inside, it changes the index of object inside so making it unsubscriptble
 
 ## Data Structures
 categorized as linear and non-linear structures.
@@ -59,6 +59,9 @@ Python behavior is pass by object references. Variables are references to object
     print(f"Before function: {my_list}")
     modify_list(my_list)
     print(f"After function: {my_list}")
+
+## Hashing
+Hashing is the process of converting an input (like a string, file, or data) into a fixed-length string of characters using a mathematical function. Hashing speeds up the process. Hashing is used when encoding is expensive like one hot enocding, storing hashing of passwords and senstive information instead of plain text for security, in a larger dataset to find duplicates or to search data instead of raw data if we hash and look up its faster. One thing to note is hashing is one way operation so u have to hash partial data like unique id's or store hashed data and raw input somewhere to look up. Hash value u same all the time for same input. so u can match hashes. 
 
 ### Functions and Methods
 - **Appending vs Extending:** `append()` adds a single element, while `extend()` adds multiple elements.
