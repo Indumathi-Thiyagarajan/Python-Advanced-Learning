@@ -1,5 +1,10 @@
 **Everything is an object**
 
+Tuple is immutable, list is mutable. Mutable means we can modify where as immutable means its not changeable which is gonna make it super fast. Used in games and multi media where speed is important. 
+
+Sets are unsubsriptible , in the process of keep non duplicate unique values inside, it changes the index of object inside so making it unsubscriptble
+
+
 ### Sequence:
 A sequence is a general term for an ordered collection of items. Python sequences include lists, tuples, strings, ranges, and more. A list is a specific type of sequence that is mutable, meaning its contents can be changed after creation."""
 
@@ -255,6 +260,7 @@ Should return a string that ideally looks like a valid Python expression to recr
     # Using repr() to get the string representation
     print(repr(person))  # Output: Person(name='Alice', age=30)
 
+## Tupple
 ### named tuple:
 
 A named tuple in Python is a subclass of tuples that allows you to access its elements using named fields instead of just index positions.
