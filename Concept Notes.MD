@@ -6,24 +6,41 @@
 
 * **Module** is a file that is stored in python memory that can be imported. It can also be a .py file stored manually by you in your working environment. 
 
-* When we are assigning a =6 its not a being assigned to 6. Its just that a is pointing to memory address where a is stored. 
+* **Interning** When we are assigning a =6 its not a being assigned to 6. Its just that a is pointing to memory address where a is stored.
+When we assign a = b = c = "ind" all three variables will be stored in same id. most string stoll 4096 are interned and integer from -5 to 256 are intered.
 
-* Variables are references to objects in memory. When passing arguments to functions, you're passing these references. For immutable objects ( str, int and tuple), any modification creates a new object, leaving the original unchanged. For mutable objects, modifications affect the original object directly. 
+* Python behavior is pass by object references. Variables are references to objects in memory. When passing arguments to functions, you're passing these references. 
 
-                def modify_integer(x):
-                    x += 1
-                    print(f"Inside function: {x}")
+      1. For immutable objects ( str, int and tuple), these behaves like pass by value behaviour. So any modification creates a new object, leaving the original unchanged. But when u are assigning the fucntion to a new variable it creates a new object, so then it wil change. 
+          Immutable object: ( before and after function prints same number, the num variable is unchange. But when u assign it to new varibale ass it becomes new object and get new value assigned. 
+          
+                          def modify_integer(x):
+                            x += 1
+                            print(f"Inside function: {x}")
+                            return x
+                        
+                        num = 5
+                        print(f"Before function: {num}")
+                        modify_integer(num)
+                        print(f"After function: {num}")
+                        ass = modify_integer(num)
+                        print(f" assigning integer: {ass}")
+
+      2. For mutable objects, modifications affect the original object directly. 
+
+                  def modify_list(lst):
+                    lst.append(4)
+                    print(f"Inside function: {lst}")
                 
-                num = 5
-                print(f"Before function: {num}")
-                modify_integer(num)
-                print(f"After function: {num}")
+                my_list = [1, 2, 3]
+                print(f"Before function: {my_list}")
+                modify_list(my_list)
+                print(f"After function: {my_list}")
+
+    
 
 
-                
-
-
-* help(func name) to understand the basic type of function input
+* help(func name) to understand the basic type of function input 
 
 
 ### Sequence:
