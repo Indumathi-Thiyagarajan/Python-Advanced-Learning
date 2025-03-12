@@ -4,6 +4,27 @@
 
 * Sets are unsubsriptible , in the process of keep non duplicate unique values inside, it changes the index of object inside so making it unsubscriptble
 
+* **Module** is a file that is stored in python memory that can be imported. It can also be a .py file stored manually by you in your working environment. 
+
+* When we are assigning a =6 its not a being assigned to 6. Its just that a is pointing to memory address where a is stored. 
+
+* Variables are references to objects in memory. When passing arguments to functions, you're passing these references. For immutable objects ( str, int and tuple), any modification creates a new object, leaving the original unchanged. For mutable objects, modifications affect the original object directly. 
+
+                def modify_integer(x):
+                    x += 1
+                    print(f"Inside function: {x}")
+                
+                num = 5
+                print(f"Before function: {num}")
+                modify_integer(num)
+                print(f"After function: {num}")
+
+
+                
+
+
+* help(func name) to understand the basic type of function input
+
 
 ### Sequence:
 A sequence is a general term for an ordered collection of items. Python sequences include lists, tuples, strings, ranges, and more. A list is a specific type of sequence that is mutable, meaning its contents can be changed after creation."""
