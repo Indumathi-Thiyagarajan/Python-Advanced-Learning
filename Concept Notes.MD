@@ -1,6 +1,6 @@
 # SUMMARY:
 
-* Everything is an object means all objects can be assigned to variables, passed as arguments, or returned from functions. Most elements have attributes and methods that can be accessed using dot notation
+* Everything is an object means all objects have unique memory location and can be assigned to variables, passed as arguments, or returned from functions. Most elements have attributes and methods that can be accessed using dot notation
 
 Attributes and methods: Most elements have attributes and methods that can be accessed using dot notation.7
 
@@ -43,8 +43,9 @@ When we assign a = b = c = "ind" all three variables will be stored in same id. 
 
     
 
-
+* class is 
 * help(func name) to understand the basic type of function input 
+
 
 
 ### Sequence:
@@ -615,7 +616,7 @@ Using a generator simplifies the implementation of the Deck class by eliminating
 **attributes** : Attributes are variables that belong to an object or class. They are used to store data that is associated with an instance of a class.
 **parameters** : Parameters are variables that are used in function or method definitions to accept input values. They are placeholders for the arguments that will be passed to the function or method.
 
-Absolutely, I’d be happy to explain this concept in detail! When you call a class (let’s call it Class1) within another class (let’s call it Class2), you typically create an instance of Class1 inside Class2. This is a common practice in object-oriented programming and is known as composition. Here’s a step-by-step explanation:
+ When you call a class (let’s call it Class1) within another class (let’s call it Class2), you typically create an instance of Class1 inside Class2. This is a common practice in object-oriented programming and is known as composition. Here’s a step-by-step explanation:
 
     class Class1:
         def __init__(self, attribute1, attribute2):
@@ -875,74 +876,6 @@ Python’s built-in iterators for lists, tuples, strings, etc., already have the
             cars.append(car)
     cars[0]
 
-##### custom class usage:
-
-When you create your own classes and want them to be iterable, you need to implement these methods yourself using __next__() and __iter__() inside your class. 
-
-
-# __iter__():
-
-usually __iter__() returns self making the entire instance of class iterable. The __iter__ method itself does not perform iteration; it simply returns an iterator. For the iteration to work, the returned iterator must implement the __next__ method. So __iter__() cannot work independentaly. When you create a custom class that represents a collection of items, implementing __iter__ allows you to use it in a for loop or any other context that expects an iterable.
-
-# __next__():
-
-The __next__ method is responsible for returning the next item in the sequence and raising a StopIteration exception when there are no more items. next can work independently. 
-
-    if i need to iterate over instance of class using for loop then. i need iter.. but if i am calling instance of the class without using for loop using 
-    
-    # direct calls like below.
-
-    class Squares:
-    def __init__(self, length):
-        self.length = length
-        self.i = 0
-    
-    def __next__(self):
-        if self.i >= self.length:
-            raise StopIteration
-        else:
-            result = self.i ** 2
-            self.i += 1
-            return result   
-    
-    def __len__(self):
-        return self.length
-
-    squares = Squares(5)
-
-    # Using next() directly
-    print(next(squares))  # Output: 0
-    print(next(squares))  # Output: 1
-    print(next(squares))  # Output: 4
-    print(next(squares))  # Output: 9
-    print(next(squares))  # Output: 16
-    # The next call will raise StopIteration
-
-    # iterating over instance of a class
-
-    class Squares:
-    def __init__(self, length):
-        self.length = length
-        self.i = 0
-    
-    def __iter__(self):
-        self.i = 0  # Reset the counter
-        return self
-    
-    def __next__(self):
-        if self.i >= self.length:
-            raise StopIteration
-        else:
-            result = self.i ** 2
-            self.i += 1
-            return result   
-    
-    def __len__(self):
-        return self.length
-
-    squares = Squares(5)
-    for square in squares:
-        print(square)
 
     
 # 🌞🌞🌞 ITERATING CLASS INSIDE A CLASS 🌞🌞🌞:
