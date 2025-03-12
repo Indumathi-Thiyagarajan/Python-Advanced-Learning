@@ -1,8 +1,8 @@
 **Everything is an object**
 
-Tuple is immutable, list is mutable. Mutable means we can modify where as immutable means its not changeable which is gonna make it super fast. Used in games and multi media where speed is important. 
+* Tuple is immutable, list is mutable. Mutable means we can modify where as immutable means its not changeable which is gonna make it super fast. Used in games and multi media where speed is important. 
 
-Sets are unsubsriptible , in the process of keep non duplicate unique values inside, it changes the index of object inside so making it unsubscriptble
+* Sets are unsubsriptible , in the process of keep non duplicate unique values inside, it changes the index of object inside so making it unsubscriptble
 
 
 ### Sequence:
