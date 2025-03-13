@@ -60,12 +60,40 @@ Python behavior is pass by object references. Variables are references to object
     modify_list(my_list)
     print(f"After function: {my_list}")
 
-## Sequence
+## Why hashing is helpful ?
 Sequence referes to list, tuple, string, range where the items are ordered. So when we search an item that is sequence it goes from 0th index to the item index. if there is million records its time consuming, so hashing is useful
-
-## Hashing
 Hashing is the process of converting an input (like a string, file, or data) into a fixed-length string of characters using a mathematical function. Hashing speeds up the process. Hashing is used when encoding is expensive like one hot enocding, storing hashing of passwords and senstive information instead of plain text for security, in a larger dataset to find duplicates or to search data instead of raw data if we hash and look up its faster. One thing to note is hashing is one way operation so u have to hash partial data like unique id's or store hashed data and raw input somewhere to look up. Hash value u same all the time for same input. so u can match hashes. 
 
+## All about Iterators:
+Iterators travers over a sequence one element at a time. They dont store entire sequence in memory. Iterator must have __iter__() and __next__(). 
+
+- **Iterable** is an object that stores values and can be looped over. even though iterable has iter , it needs __iter__() to convert it to iterator. We can use next over the new iterator object and loop over. Iterable can be looped over in one of below methods
+  1️⃣ Convert it into an iterator using iter() → then use next() manually.
+  2️⃣ Use a for loop, which automatically calls iter() and next() in the background.
+  
+- **Iterator** is an object that do not store and produces one value at a time. this is memory efficient. Needs both __iter__() and __next__().
+
+One of the major difference between using iterable and iterator is that, once the iterator ends u have to create a new object again and then loop over. example. 
+
+    # Create a new iterator from the same list
+    numbers = [1]
+    num_iter = iter(numbers)  # Create a new iterator
+    print(next(num_iter))  # num_iter has exhausted and cannot be reused,. now you have to create a new 
+
+    for num in numbers:
+      print(num) # can be called multiple times without re-initialization
+
+  
+Iterators are classified into three
+
+  1️⃣ **Inbuilt iterator**:
+  Python’s built-in has iterable objects as lists, tuples, dictionary, sets, file objects, strings, etc. These objects can be converted to iterators using iter()
+  
+  2️⃣ **Custom iterator**:
+  A User-Defined Iterator (Custom Iterator) is when you create your own class with iter and next and make the class iterable
+
+  3️⃣ **Generators**:
+  
 ## Functions and Methods
 - **Appending vs Extending:** `append()` adds a single element, while `extend()` adds multiple elements.
 - **Pop:** Removes and returns an element (removes the last by default).
