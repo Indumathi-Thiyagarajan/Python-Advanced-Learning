@@ -60,16 +60,19 @@ Python behavior is pass by object references. Variables are references to object
     modify_list(my_list)
     print(f"After function: {my_list}")
 
+## Sequence
+Sequence referes to list, tuple, string, range where the items are ordered. So when we search an item that is sequence it goes from 0th index to the item index. if there is million records its time consuming, so hashing is useful
+
 ## Hashing
 Hashing is the process of converting an input (like a string, file, or data) into a fixed-length string of characters using a mathematical function. Hashing speeds up the process. Hashing is used when encoding is expensive like one hot enocding, storing hashing of passwords and senstive information instead of plain text for security, in a larger dataset to find duplicates or to search data instead of raw data if we hash and look up its faster. One thing to note is hashing is one way operation so u have to hash partial data like unique id's or store hashed data and raw input somewhere to look up. Hash value u same all the time for same input. so u can match hashes. 
 
-### Functions and Methods
+## Functions and Methods
 - **Appending vs Extending:** `append()` adds a single element, while `extend()` adds multiple elements.
 - **Pop:** Removes and returns an element (removes the last by default).
 - **Deep vs Shallow Copy:** A shallow copy shares references to nested objects, while deep copy recursively copies all elements.
 - **Map/Reduce:** `map()` applies a function to all items in an iterable, while `reduce()` aggregates elements into a single value.
 
-### Sequences and Iterators
+### Iterators
 - **Iterable vs Iterator:** An iterable returns an iterator, while an iterator supports `__iter__` and `__next__` methods to return items one at a time.
 - **For loop:** Looks for `__iter__` and `__next__` methods to retrieve items from an iterator until `StopIteration` is raised.
   
@@ -81,7 +84,7 @@ Hashing is the process of converting an input (like a string, file, or data) int
 - **Generators:** Functions that yield values one at a time (use `yield` keyword) and are more memory efficient.
 - **List Comprehension vs Generator Expression:** Use list comprehensions for multiple iterations, while generators are lazy, providing values on the fly.
 
-### Hashing and Dictionaries
+### Dictionaries
 - **Hashing:** Used for fast search operations. Immutable types can be used as dictionary keys.
 - **Dictionary Operations:** `get()`, `setdefault()`, `update()` methods provide efficient ways to handle key-value pairs.
   
